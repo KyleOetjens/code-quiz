@@ -1,0 +1,17 @@
+* {
+    background-color: grey;
+    color: white;
+    text-align: center;
+}
+.questions {
+    display: none;
+}
+button {
+    display: block;
+}
+#topScore {
+    margin-right: 5px;
+    border: 2px solid black;
+    width: 50%;
+    float: right;
+}
