@@ -9,6 +9,10 @@ let b1 = document.createElement('button');
 let b2 = document.createElement('button');
 let b3 = document.createElement('button');
 let b4 = document.createElement('button');
+let correctAnswer;
+let incorrectAnswer1;
+let incorrectAnswer2;
+let incorrectAnswer3;
 let timeInterval;
 let score = {
     initials: "",
@@ -70,8 +74,12 @@ function startTime() {
 }
 function sendMessage() {
     timeL.textContent = "Game Over"
-
 }
+function removeListener () {
+    console.log("removed");
+    correctAnswer.removeEventListener("click", showQuestions);
+}
+
 startGame.addEventListener("click", showQuestions)
 
 function showQuestions(event) {
@@ -79,17 +87,18 @@ function showQuestions(event) {
     event.stopPropagation();
     console.log(event);
     console.log("questions started");
-    let correctAnswer = b1;
-    let incorrectAnswer1 = b2;
-    let incorrectAnswer2 = b3;
-    let incorrectAnswer3 = b4;
     buildQuestions()
     qh.textContent = "First Question"
     b1.textContent = "Pizza"
     b2.textContent = "Burgers"
     b3.textContent = "Steak"
     b4.textContent = "Fish"
+    let correctAnswer = b1;
+    let incorrectAnswer1 = b2;
+    let incorrectAnswer2 = b3;
+    let incorrectAnswer3 = b4;
     correctAnswer.addEventListener("click", secondQuestion);
+    correctAnswer.addEventListener("click",removeListener);
     incorrectAnswer1.addEventListener("click", subtractTime);
     incorrectAnswer2.addEventListener("click", subtractTime);
     incorrectAnswer3.addEventListener("click", subtractTime);
@@ -158,19 +167,14 @@ function forthQuestion(event) {
 
 /*
 start screen with title, text and start button (display high scores if possible)
-
 ---Question boxes-----
-
 question text
 ordered list (4 opptions)
 answer button that moves on if the anxwer is correct and sends a message/ reduces time if incorect
-
-
 ------end of test-------
 high score list
 entry to put in initials with score
 options to quit or try again
-
 if(secondsLeft === 0) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
@@ -190,7 +194,6 @@ if(secondsLeft === 0) {
     b2.textContent = "Burgers"
     b3.textContent = "Steak"
     b4.textContent = "Fish"
-
     let li1 = document.createElement('li');
 let li2 = document.createElement('li');
 let li3 = document.createElement('li');
