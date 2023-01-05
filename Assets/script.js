@@ -5,25 +5,21 @@ let body = document.body
 let qdiv = document.createElement("div")
 let qh = document.createElement("h1")
 let listEl = document.createElement("ul")
-let b1 = document.createElement('button');
-let b2 = document.createElement('button');
-let b3 = document.createElement('button');
-let b4 = document.createElement('button');
 let correctAnswer;
 let incorrectAnswer1;
 let incorrectAnswer2;
 let incorrectAnswer3;
 let timeInterval;
 let score = {
-    initials: "",
-    timeScore: 0,
-    questionsRight: 0
+    initials: [],
+    timeScore: [],
+    questionsRight: []
 }
-function showHighScore () {
+function showHighScore() {
     let zScore = localStorage.getItem("points");
-let zName = localStorage.getItem("name")
-document.querySelector("#points").textContent = score.timeScore;
-document.querySelector("#name").textContent = score.initials
+    let zName = localStorage.getItem("name")
+    document.querySelector("#scoreSpan").innerHTML = zScore;
+    document.querySelector("#nameSpan").innerHTML = zName
 }
 function addTime() {
     timeLeft = timeLeft + 25
@@ -32,62 +28,50 @@ function subtractTime() {
     timeLeft = timeLeft - 5
 }
 function addScore() {
-    score.timeScore = timeLeft,
-        score.questionsRight += 1
+    (score.timeScore = timeLeft), (score.questionsRight = score.questionsRight + 1)
 }
-function buildQuestions() {
-    body.appendChild(qdiv);
-    qdiv.appendChild(qh);
-    qdiv.appendChild(listEl);
-    listEl.appendChild(b1);
-    listEl.appendChild(b2);
-    listEl.appendChild(b3);
-    listEl.appendChild(b4);
+function buildQuestions(b1, b2, b3, b4) {
+    body.appendChild(qdiv)
+    qdiv.appendChild(qh)
+    qdiv.appendChild(listEl)
+    listEl.innerHTML = ""
+    listEl.appendChild(b1)
+    listEl.appendChild(b2)
+    listEl.appendChild(b3)
+    listEl.appendChild(b4)
 }
 function savePoints() {
     localStorage.setItem("points", score.timeScore)
     localStorage.setItem("questionsRight", score.questionsRight)
 }
-function setScore() {
-    JSON.parse(localStorage.getItem("points"))
-    document.querySelector("#points").textContent = score.timeScore;
-    let name1 = window.prompt("What is your name?")
-    document.querySelector("#name").textContent = name1
-    localStorage.setItem("name", name1)
-}
 startGame.addEventListener("click", startTime)
-
 function startTime() {
     console.log("started");
     let timeInterval = setInterval(function () {
         timeLeft--;
         timeL.textContent = timeLeft + " seconds left";
-
-        if (timeLeft < 0) {
-            // Stops execution of action at set interval
+        if (timeLeft < 1) {
             clearInterval(timeInterval);
-            // Calls function to create and append image
             sendMessage();
-            setScore();
+            setScore1();
         }
     }, 1000);
 }
 function sendMessage() {
     timeL.textContent = "Game Over"
 }
-function removeListener () {
-    console.log("removed");
-    correctAnswer.removeEventListener("click", showQuestions);
-}
 
 startGame.addEventListener("click", showQuestions)
 
 function showQuestions(event) {
     console.log(score);
-    event.stopPropagation();
     console.log(event);
     console.log("questions started");
-    buildQuestions()
+    let b1 = document.createElement('button')
+    let b2 = document.createElement('button')
+    let b3 = document.createElement('button')
+    let b4 = document.createElement('button')
+    buildQuestions(b1, b2, b3, b4)
     qh.textContent = "First Question"
     b1.textContent = "Pizza"
     b2.textContent = "Burgers"
@@ -98,24 +82,25 @@ function showQuestions(event) {
     let incorrectAnswer2 = b3;
     let incorrectAnswer3 = b4;
     correctAnswer.addEventListener("click", secondQuestion);
-    correctAnswer.addEventListener("click",removeListener);
     incorrectAnswer1.addEventListener("click", subtractTime);
     incorrectAnswer2.addEventListener("click", subtractTime);
     incorrectAnswer3.addEventListener("click", subtractTime);
-    return
 }
-
 function secondQuestion(event) {
     addScore();
     savePoints()
-    event.stopPropagation();
     addTime();
+    console.log(score);
     console.log("2nd question started");
-    let q2correctAnswer = b2;
-    let q2incorrectAnswer1 = b1;
-    let q2incorrectAnswer2 = b3;
-    let q2incorrectAnswer3 = b4;
-    buildQuestions()
+    let b1 = document.createElement('button')
+    let b2 = document.createElement('button')
+    let b3 = document.createElement('button')
+    let b4 = document.createElement('button')
+    let q2correctAnswer = b3
+    let q2incorrectAnswer1 = b1
+    let q2incorrectAnswer2 = b2
+    let q2incorrectAnswer3 = b4
+    buildQuestions(b1, b2, b3, b4)
     qh.textContent = "second Question"
     b1.textContent = "snake"
     b2.textContent = "bear"
@@ -125,46 +110,77 @@ function secondQuestion(event) {
     q2incorrectAnswer1.addEventListener("click", subtractTime);
     q2incorrectAnswer2.addEventListener("click", subtractTime);
     q2incorrectAnswer3.addEventListener("click", subtractTime);
-    return
 }
 function thirdQuestion(event) {
     addScore()
     savePoints()
     console.log(score);
-    event.stopPropagation();
     addTime();
     console.log("3rd question started");
-    buildQuestions()
-    let correctAnswer = b3;
+    let b1 = document.createElement('button')
+    let b2 = document.createElement('button')
+    let b3 = document.createElement('button')
+    let b4 = document.createElement('button')
+    buildQuestions(b1, b2, b3, b4)
+    let correctAnswer = b3
     qh.textContent = "Third Question"
     b1.textContent = "pop"
     b2.textContent = "water"
     b3.textContent = "milk"
     b4.textContent = "juice"
+    let q3correctAnswer = b3
+    let q3incorrectAnswer1 = b1
+    let q3incorrectAnswer2 = b2
+    let q3incorrectAnswer3 = b4
     correctAnswer.addEventListener("click", forthQuestion);
-    return
+    q3incorrectAnswer1.addEventListener('click', subtractTime)
+    q3incorrectAnswer2.addEventListener('click', subtractTime)
+    q3incorrectAnswer3.addEventListener('click', subtractTime)
 }
-
 function forthQuestion(event) {
     addScore()
     savePoints()
     console.log(score);
-    event.stopPropagation();
     addTime();
     console.log("4th question started");
-    buildQuestions()
+    let b1 = document.createElement('button')
+    let b2 = document.createElement('button')
+    let b3 = document.createElement('button')
+    let b4 = document.createElement('button')
+    buildQuestions(b1, b2, b3, b4)
     let correctAnswer = b4;
     qh.textContent = "last Question"
     b1.textContent = "pop"
     b2.textContent = "water"
     b3.textContent = "milk"
     b4.textContent = "juice"
-    correctAnswer.addEventListener("click", addTime);
-    return
-
+    let q4correctAnswer = b4
+    let q4incorrectAnswer1 = b1
+    let q4incorrectAnswer2 = b2
+    let q4incorrectAnswer3 = b3
+    q4correctAnswer.addEventListener("click", addTime)
+    q4correctAnswer.addEventListener("click", setScore1)
+    q4incorrectAnswer1.addEventListener('click', subtractTime)
+    q4incorrectAnswer2.addEventListener('click', subtractTime)
+    q4incorrectAnswer3.addEventListener('click', subtractTime)
 }
-
-
+function setScore1() {
+    let scoreList1 = document.createElement("ul")
+    let scoreLi = document.createElement('li')
+    let nameSpan = document.createElement("span")
+    nameSpan.setAttribute("class", "nameSpan")
+    let scoreSpan = document.createElement("span")
+    scoreSpan.setAttribute("class", "scoreSpan")
+    document.getElementById("scoreList").appendChild(scoreList1)
+    scoreList1.appendChild(scoreLi)
+    scoreLi.appendChild(nameSpan)
+    scoreLi.appendChild(scoreSpan)
+    JSON.parse(localStorage.getItem("points"))
+    document.querySelector(".scoreSpan").innerHTML = score.timeScore;
+    let name1 = window.prompt("What is your name?")
+    document.querySelector(".nameSpan").innerHTML = name1
+    localStorage.setItem("name", name1)
+}
 /*
 start screen with title, text and start button (display high scores if possible)
 ---Question boxes-----
@@ -205,4 +221,22 @@ body.appendChild(qdiv);
     listEl.appendChild(b2);
     listEl.appendChild(b3);
     listEl.appendChild(b4);
+
+    function setScore() {
+    JSON.parse(localStorage.getItem("points"))
+    document.querySelector("#points").textContent = score.timeScore;
+    let name1 = window.prompt("What is your name?")
+    document.querySelector("#name").textContent = name1
+    localStorage.setItem("name", name1)
+}
+let scoreList1 = document.createElement("ul")
+    let scoreLi = document.createElement('li')
+    let nameSpan = document.createElement("span")
+    nameSpan.setAttribute("class", "nameSpan")
+    let scoreSpan = document.createElement("span")
+    scoreSpan.setAttribute("class", "scoreSpan")
+    document.getElementById("scoreList").appendChild(scoreList1)
+    scoreList1.appendChild(scoreLi)
+    scoreLi.appendChild(nameSpan)
+    scoreLi.appendChild(scoreSpan)
     */
