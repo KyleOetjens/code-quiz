@@ -172,6 +172,19 @@ function forthQuestion(event) {
 }
 function setScore1() {
     clearInterval(timeInterval);
+    let scoreList1 = document.createElement("li")
+    let scoreSpan = document.createElement("span")
+    document.getElementById("scoreList").appendChild(scoreList1)
+    scoreList1.appendChild(scoreSpan)
+    JSON.parse(localStorage.getItem("points"))
+    let name1 = window.prompt("What is your name?")
+    localStorage.setItem("name", name1)
+    scoreSpan.innerHTML = "Name: "+name1 +" Score: "+score.timeScore;
+    
+}
+/*
+function setScore1() {
+    clearInterval(timeInterval);
     let scoreList1 = document.createElement("ul")
     let scoreLi = document.createElement('li')
     let nameSpan = document.createElement("span")
@@ -187,4 +200,4 @@ function setScore1() {
     let name1 = window.prompt("What is your name?")
     document.querySelector(".nameSpan").innerHTML = "Name: "+name1
     localStorage.setItem("name", name1)
-}
+}*/
