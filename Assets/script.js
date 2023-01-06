@@ -10,16 +10,15 @@ let incorrectAnswer1;
 let incorrectAnswer2;
 let incorrectAnswer3;
 let timeInterval;
+let zScore = localStorage.getItem("points");
+    let zName = localStorage.getItem("name")
+    document.querySelector("#score").innerHTML = zScore;
+    document.querySelector("#name").innerHTML = zName
+
 let score = {
     initials: [],
     timeScore: [],
     questionsRight: []
-}
-function showHighScore() {
-    let zScore = localStorage.getItem("points");
-    let zName = localStorage.getItem("name")
-    document.querySelector("#scoreSpan").innerHTML = zScore;
-    document.querySelector("#nameSpan").innerHTML = zName
 }
 function addTime() {
     timeLeft = timeLeft + 25
@@ -45,9 +44,11 @@ function savePoints() {
     localStorage.setItem("questionsRight", score.questionsRight)
 }
 startGame.addEventListener("click", startTime)
+
 function startTime() {
-    console.log("started");
-    let timeInterval = setInterval(function () {
+    timeLeft = 15;
+    timeL.textContent = timeLeft + " seconds left";
+    timeInterval = setInterval(function () {
         timeLeft--;
         timeL.textContent = timeLeft + " seconds left";
         if (timeLeft < 1) {
@@ -158,13 +159,19 @@ function forthQuestion(event) {
     let q4incorrectAnswer1 = b1
     let q4incorrectAnswer2 = b2
     let q4incorrectAnswer3 = b3
-    q4correctAnswer.addEventListener("click", addTime)
-    q4correctAnswer.addEventListener("click", setScore1)
+   // q4correctAnswer.addEventListener("click", addTime)
+    //q4correctAnswer.addEventListener("click", addTime;setScore1)
+    q4correctAnswer.addEventListener("click", function endGame()
+    {
+        addScore()
+        setScore1()
+    })
     q4incorrectAnswer1.addEventListener('click', subtractTime)
     q4incorrectAnswer2.addEventListener('click', subtractTime)
     q4incorrectAnswer3.addEventListener('click', subtractTime)
 }
 function setScore1() {
+    clearInterval(timeInterval);
     let scoreList1 = document.createElement("ul")
     let scoreLi = document.createElement('li')
     let nameSpan = document.createElement("span")
@@ -176,67 +183,8 @@ function setScore1() {
     scoreLi.appendChild(nameSpan)
     scoreLi.appendChild(scoreSpan)
     JSON.parse(localStorage.getItem("points"))
-    document.querySelector(".scoreSpan").innerHTML = score.timeScore;
+    document.querySelector(".scoreSpan").innerHTML = "Score: "+score.timeScore;
     let name1 = window.prompt("What is your name?")
-    document.querySelector(".nameSpan").innerHTML = name1
+    document.querySelector(".nameSpan").innerHTML = "Name: "+name1
     localStorage.setItem("name", name1)
 }
-/*
-start screen with title, text and start button (display high scores if possible)
----Question boxes-----
-question text
-ordered list (4 opptions)
-answer button that moves on if the anxwer is correct and sends a message/ reduces time if incorect
-------end of test-------
-high score list
-entry to put in initials with score
-options to quit or try again
-if(secondsLeft === 0) {
-      // Stops execution of action at set interval
-      clearInterval(timerInterval);
-      // Calls function to create and append image
-      sendMessage();
-    }
-    listEl.appendChild(li1);
-    li1.appendChild(b1);
-    listEl.appendChild(li2);
-    li1.appendChild(b2);
-    listEl.appendChild(li3);
-    li1.appendChild(b3);
-    listEl.appendChild(li4);
-    li1.appendChild(b4);
-    qh.textContent = "First Question"
-    b1.textContent = "Pizza"
-    b2.textContent = "Burgers"
-    b3.textContent = "Steak"
-    b4.textContent = "Fish"
-    let li1 = document.createElement('li');
-let li2 = document.createElement('li');
-let li3 = document.createElement('li');
-let li4 = document.createElement('li');
-body.appendChild(qdiv);
-    qdiv.appendChild(qh);
-    qdiv.appendChild(listEl);
-    listEl.appendChild(b1);
-    listEl.appendChild(b2);
-    listEl.appendChild(b3);
-    listEl.appendChild(b4);
-
-    function setScore() {
-    JSON.parse(localStorage.getItem("points"))
-    document.querySelector("#points").textContent = score.timeScore;
-    let name1 = window.prompt("What is your name?")
-    document.querySelector("#name").textContent = name1
-    localStorage.setItem("name", name1)
-}
-let scoreList1 = document.createElement("ul")
-    let scoreLi = document.createElement('li')
-    let nameSpan = document.createElement("span")
-    nameSpan.setAttribute("class", "nameSpan")
-    let scoreSpan = document.createElement("span")
-    scoreSpan.setAttribute("class", "scoreSpan")
-    document.getElementById("scoreList").appendChild(scoreList1)
-    scoreList1.appendChild(scoreLi)
-    scoreLi.appendChild(nameSpan)
-    scoreLi.appendChild(scoreSpan)
-    */
