@@ -1,20 +1,29 @@
 * {
-    background-color: grey;
-    color: white;
+    background-color: rgb(185, 178, 183);
+    color: rgb(9, 8, 8);
     text-align: center;
 }
+
 .questions {
     display: none;
 }
+
 button {
     display: block;
+    background-color: #a547bf;
+    height: 75px;
+    width: 100px;
 }
+
 #topScore {
     margin-right: 5px;
     border: 2px solid black;
-    width: 50%;
+    border-radius: 5px;
+    width: 30%;
+    height: 100%;
     float: right;
 }
+
 #topScore p {
     display: none;
 }

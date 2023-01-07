@@ -12,52 +12,21 @@
 </head>
 
 <body>
-    <section>
+    <section id="gameSection">
         <h1>Coding Quiz Challenge</h1>
         <p>Time to test your knowledge</p>
         <button id="btn">START!</button>
         <div>
-            <h2>time left</h2>
+            <h2>Time</h2>
             <h2 id="timer"></h2>
         </div>
-        <section class="wholequiz">
-            <ul class="questions" id="q1" data-state="hidden">
-                <p>Question 1</p>
-                <li><button>Answer 1</button></li>
-                <li><button>Answer 2</button></li>
-                <li><button>Answer 3</button></li>
-                <li><button>Answer 4</button></li>
-            </ul>
-            <ul class="questions" id="q2">
-                <p>Question 2</p>
-                <li><button>Answer 1</button></li>
-                <li><button>Answer 2</button></li>
-                <li><button>Answer 3</button></li>
-                <li><button>Answer 4</button></li>
-            </ul>
-            <ul class="questions" id="q3">
-                <p>Question 3</p>
-                <li><button>Answer 1</button></li>
-                <li><button>Answer 2</button></li>
-                <li><button>Answer 3</button></li>
-                <li><button>Answer 4</button></li>
-            </ul>
-            <ul class="questions" id="q4">
-                <p>Questions 4 </p>
-                <li><button>Answer 1</button></li>
-                <li><button>Answer 2</button></li>
-                <li><button>Answer 3</button></li>
-                <li><button>Answer 4</button></li>
-            </ul>
-        </section>
         <div id="topScore">
-            <h3 id="hs">High Scores</h3>
+            <h3 id="hs">Scores</h3>
             <div>
                 <ul id="scoreList" style="list-style-type: none;">
-                    <li>Name:  <span id = "name"></span><br> Score:  <span id ="score"></span></li>
+                    <li>Name: <span id = "name"></span> Score: <span id ="score"></span></li><br>
                 </ul>
             </div>
-
         </div>
     </section>
     <script src="./Assets/script.js"></script>
