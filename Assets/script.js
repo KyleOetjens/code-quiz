@@ -19,7 +19,6 @@ let score = {
     playerName: [],
     questionsRight: []
 }
-console.log(score);
 //functions that run throughout the game
 function addTime() {
     timeLeft = timeLeft + 5
@@ -66,9 +65,6 @@ function sendMessage() {
 }
 // group of functions for questions
 function showQuestions(event) {
-    console.log(score);
-    console.log(score);
-    console.log(event);
     let b1 = document.createElement('button')
     let b2 = document.createElement('button')
     let b3 = document.createElement('button')
@@ -89,11 +85,9 @@ function showQuestions(event) {
     incorrectAnswer3.addEventListener("click", subtractTime);
 }
 function secondQuestion(event) {
-    console.log(score);
     addTime();
     addScore();
     savePoints()
-    console.log(score);
     let b1 = document.createElement('button')
     let b2 = document.createElement('button')
     let b3 = document.createElement('button')
@@ -114,7 +108,6 @@ function secondQuestion(event) {
     q2incorrectAnswer3.addEventListener("click", subtractTime);
 }
 function thirdQuestion(event) {
-    console.log(score);
     addTime();
     addScore();
     savePoints()
@@ -139,7 +132,6 @@ function thirdQuestion(event) {
     q3incorrectAnswer3.addEventListener('click', subtractTime)
 }
 function forthQuestion(event) {
-    console.log(score);
     addTime();
     addScore();
     savePoints()
