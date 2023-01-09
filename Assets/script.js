@@ -17,17 +17,18 @@ document.querySelector("#name").innerHTML = zName
 let score = {
     timeScore: [],
     playerName: [],
-    questionsRight: []
 }
 //functions that run throughout the game
 function addTime() {
     timeLeft = timeLeft + 5
+    timeL.textContent = timeLeft + " seconds left";
 }
 function subtractTime() {
     timeLeft = timeLeft - 5
+    timeL.textContent = timeLeft + " seconds left";
 }
 function addScore() {
-    (score.timeScore = timeLeft), (score.questionsRight = score.questionsRight + 1)
+    (score.timeScore = timeLeft)
 }
 function buildQuestions(b1, b2, b3, b4) {
     body.appendChild(qdiv)
@@ -41,7 +42,6 @@ function buildQuestions(b1, b2, b3, b4) {
 }
 function savePoints() {
     localStorage.setItem("points", score.timeScore)
-    localStorage.setItem("questionsRight", score.questionsRight)
 }
 //event listeners to start the quiz
 startGame.addEventListener("click", startTime)
@@ -150,9 +150,12 @@ function forthQuestion(event) {
     let q4incorrectAnswer1 = b1
     let q4incorrectAnswer2 = b2
     let q4incorrectAnswer3 = b3
-    q4correctAnswer.addEventListener("click", addTime)
-    q4correctAnswer.addEventListener("click", addScore)
-    q4correctAnswer.addEventListener("click", setScore1)
+    q4correctAnswer.addEventListener("click", function (){
+        addTime ()
+        addScore ()
+        savePoints()
+        setScore1 ()
+    })
     q4incorrectAnswer1.addEventListener('click', subtractTime)
     q4incorrectAnswer2.addEventListener('click', subtractTime)
     q4incorrectAnswer3.addEventListener('click', subtractTime)
